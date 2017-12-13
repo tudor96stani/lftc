@@ -18,7 +18,7 @@ namespace lab5
             {
                 G = new Grammar("Grammar.txt");
                 Table = new ParseTable(G);
-                PrintFirstAndFollow();
+                PrintFirstAndFollow(Table.Firsts,Table.Follows);
                 Stack = new Stack<string>();
                 Stack.Push("$");
                 Stack.Push(G.StartSymbol);
@@ -26,16 +26,19 @@ namespace lab5
             }
             catch (ArgumentException ex)
             {
+                var fi = Utils.First(G);
+                var fol = Utils.Follow(G, fi);
+                PrintFirstAndFollow(fi,Utils.Follow(G,fi));
                 throw ex;
 
             }
 
         }
 
-        private void PrintFirstAndFollow()
+        private void PrintFirstAndFollow(Dictionary<string,HashSet<string>> Firsts,Dictionary<string,HashSet<string>> Follows)
         {
             Console.WriteLine("First(1) for each terminal:");
-            foreach (var kvp in Table.Firsts.Where(x=>G.Nonterminals.Contains(x.Key)))
+            foreach (var kvp in Firsts.Where(x=>G.Nonterminals.Contains(x.Key)))
             {
                 Console.Write(kvp.Key + ":");
                 foreach (var e in kvp.Value)
@@ -45,7 +48,7 @@ namespace lab5
                 Console.WriteLine();
             }
             Console.WriteLine("Follow(1) for each terminal:");
-            foreach (var kvp in Table.Follows)
+            foreach (var kvp in Follows)
             {
                 Console.Write(kvp.Key + ":");
                 foreach (var e in kvp.Value)

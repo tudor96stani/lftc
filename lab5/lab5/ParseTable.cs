@@ -140,11 +140,7 @@ namespace lab5
 
             foreach (var a in g.Terminals.Where(x => !x.Contains(Utils.EPSILON)))
             {
-                foreach (var a2 in g.Terminals)
-                {
-                    if (a == a2)
-                        Table.Add(a + "," + a, "pop");
-                }
+                Table.Add(a + "," + a, "pop");
             }
             Table.Add("$,$", "acc");
         }

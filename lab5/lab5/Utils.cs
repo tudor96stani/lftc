@@ -145,11 +145,10 @@ namespace lab5
                                         }
                                         if (!outV2.SetEquals(sum))
                                         {
+                                            //Verify if sum is a subset of outV2 and if their difference is not {EPSILON}
                                             if (sum.Any(x => !outV2.Contains(x)) && !sum.Except(outV2).All(x => x == EPSILON))
-
                                             {
                                                 fi.Add(A + i.ToString(), new HashSet<string>(sum.Union(outV2)));
-
                                                 changed = true;
                                             }
                                         }
@@ -314,7 +313,7 @@ namespace lab5
             {
                 foreach (var rightElem in rule.Right.Where(x => x != sym))
                 {
-                    first.UnionWith(firsts[rightElem]);
+                    first=new HashSet<string>(first.Union(firsts[rightElem]));
                     if (first.Count() == 0 || first.Any(x => x == EPSILON))
                         continue;
                     else
@@ -332,7 +331,7 @@ namespace lab5
             {
                 foreach (var rightElem in tail)
                 {
-                    first.UnionWith(firsts[rightElem]);
+                    first=new HashSet<string>(first.Union(firsts[rightElem]));
                     if (first.Count() == 0 || first.Any(x => x == EPSILON))
                         continue;
                     else
@@ -359,7 +358,7 @@ namespace lab5
                     var rules = g.ProductionRules.Where(x => x.Key.Right.Contains(A));
                     foreach (var rule in rules)
                     {
-
+                        //X -> alpha B beta
                         var listOfIndexes = rule.Key.Right.Select((x, i) => new { x, i })
                             .Where(x => x.x == A)
                             .Select(x => x.i);
@@ -376,15 +375,17 @@ namespace lab5
                                         firstOfBeta = new HashSet<string>(firstOfBeta.Union(Firsts[rule.Key.Right[j]]));
                                     }
                                 }*/
-                                var tail = rule.Key.Right.Skip(i + 1).ToList();
-                                firstOfBeta = FirstOfWithoutRule(tail[0], Firsts, tail);
+                                var beta = rule.Key.Right.Skip(i + 1).ToList();
+                                firstOfBeta = FirstOfWithoutRule(beta[0], Firsts, beta);
 
+                                //Follow(A) = Follow(A) U First(beta)
                                 var reunion = new HashSet<string>(res[rule.Key.Right[i]].Union(firstOfBeta.Where(x => x != EPSILON)));
                                 if (!res[rule.Key.Right[i]].SetEquals(reunion))
                                 {
                                     changed = true;
                                     res[rule.Key.Right[i]] = reunion;
                                 }
+                                //if ε is in First(beta), Follow(A) = Follow(A) U Follow(X)
                                 if (firstOfBeta.Contains(EPSILON))
                                 {
                                     var reunion2 = new HashSet<string>(res[rule.Key.Right[i]].Union(res[rule.Key.Left]));
@@ -398,6 +399,7 @@ namespace lab5
                             }
                             else
                             {
+                                //this is the case where X -> alpha B (B is the last symbol in the RHS of the rule)
                                 var reunion2 = new HashSet<string>(res[rule.Key.Right[i]].Union(res[rule.Key.Left]));
                                 if (!res[rule.Key.Right[i]].SetEquals(reunion2))
                                 {
