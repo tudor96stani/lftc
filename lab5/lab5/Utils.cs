@@ -327,15 +327,34 @@ namespace lab5
         public static HashSet<string> FirstOfWithoutRule(string sym, Dictionary<string, HashSet<string>> firsts, List<string> tail)
         {
             var first = firsts[sym];
+
+            //if there is an epsilon in the First set for the sym,
+            //take the elements in the tail one by one, until one that doesn't contain epsilon is found.
+            //when one that does not contain epsilon is found 
+            //remove epsilon from the set that is going to be returned and stop processing the tail
+            //if no such symbol is found, epsilon will remain in the tail
             if (first.Count() == 0 || first.Any(x => x == EPSILON))
             {
-                foreach (var rightElem in tail)
+                for (int i = 0; i < tail.Count();i++)
                 {
-                    first=new HashSet<string>(first.Union(firsts[rightElem]));
-                    if (first.Count() == 0 || first.Any(x => x == EPSILON))
+                    first=new HashSet<string>(first.Union(firsts[tail[i]]));
+                    if (first.Count() == 0 || firsts[tail[i]].Any(x => x == EPSILON))
+                    {
+                        //if (!firsts[tail[i]].Contains(EPSILON) && i == tail.Count() - 1)
+                       // {
+                        //    first.Remove(EPSILON);
+                        //}
                         continue;
+                    }
                     else
+                    {
+                        //if (!firsts[tail[i]].Contains(EPSILON) && i == tail.Count() - 1)
+                        //{
+                            first.Remove(EPSILON);
+                        //}
                         break;
+                    }
+
                 }
             }
             return first;
