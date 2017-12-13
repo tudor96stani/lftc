@@ -1,0 +1,17 @@
+﻿<Properties StartupConfiguration="{0FDF6E24-7972-4723-91C8-3BD6611C5669}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Lab2/Program.cs">
+    <Files>
+      <File FileName="Lab2/Program.cs" Line="12" Column="42" />
+      <File FileName="Lab2/FA.cs" Line="209" Column="18" />
+      <File FileName="Lab2/State.cs" Line="15" Column="1" />
+      <File FileName="Lab2/MultiMap.cs" Line="9" Column="13" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.Lab2 PreferredExecutionTarget="MonoDevelop.Default" />
+</Properties>

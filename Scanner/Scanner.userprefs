@@ -1,0 +1,18 @@
+﻿<Properties StartupConfiguration="{56C48E23-491C-4121-ACB4-1436B26EE9CC}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Scanner/Program.cs">
+    <Files>
+      <File FileName="Scanner/Program.cs" Line="262" Column="27" />
+      <File FileName="Scanner/FA.cs" Line="37" Column="30" />
+      <File FileName="Scanner/MultiMap.cs" Line="4" Column="13" />
+      <File FileName="Scanner/State.cs" Line="4" Column="13" />
+      <File FileName="Scanner/Utils.cs" Line="1" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.Scanner PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+</Properties>

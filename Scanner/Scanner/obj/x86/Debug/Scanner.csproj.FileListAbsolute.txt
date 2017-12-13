@@ -1,0 +1,5 @@
+/Users/tudorstanila/Documents/an3sem1/lftc/Scanner/Scanner/bin/Debug/Scanner.exe
+/Users/tudorstanila/Documents/an3sem1/lftc/Scanner/Scanner/bin/Debug/Scanner.pdb
+/Users/tudorstanila/Documents/an3sem1/lftc/Scanner/Scanner/obj/x86/Debug/Scanner.csproj.CoreCompileInputs.cache
+/Users/tudorstanila/Documents/an3sem1/lftc/Scanner/Scanner/obj/x86/Debug/Scanner.exe
+/Users/tudorstanila/Documents/an3sem1/lftc/Scanner/Scanner/obj/x86/Debug/Scanner.pdb

@@ -1,0 +1,5 @@
+/Users/tudorstanila/Documents/an3sem1/lftc/lab5/lab5/bin/Debug/lab5.exe
+/Users/tudorstanila/Documents/an3sem1/lftc/lab5/lab5/bin/Debug/lab5.pdb
+/Users/tudorstanila/Documents/an3sem1/lftc/lab5/lab5/obj/x86/Debug/lab5.csproj.CoreCompileInputs.cache
+/Users/tudorstanila/Documents/an3sem1/lftc/lab5/lab5/obj/x86/Debug/lab5.exe
+/Users/tudorstanila/Documents/an3sem1/lftc/lab5/lab5/obj/x86/Debug/lab5.pdb

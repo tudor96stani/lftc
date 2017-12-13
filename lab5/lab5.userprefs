@@ -1,0 +1,15 @@
+﻿<Properties StartupConfiguration="{2E749FB4-6F41-4359-A008-ABFA08C9E990}|Default">
+  <MonoDevelop.Ide.ItemProperties.lab5 PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="lab5/Utils.cs">
+    <Files>
+      <File FileName="lab5/Utils.cs" Line="388" Column="1" />
+      <File FileName="lab5/ParseTable.cs" Line="148" Column="37" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+</Properties>
