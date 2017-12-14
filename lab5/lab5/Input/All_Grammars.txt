@@ -1,0 +1,109 @@
+﻿S A
+a b c ε
+S
+S>A A c
+A>a A
+A>b
+A>ε
+--------------------
+S
+a + *
+S
+S>+ S S
+S>* S S
+S>a
+
+Input: +a*aa (acc), +aaa (not acc)
+--------------------
+S
+a + *
+S
+S>S S +
+S>S S *
+S>a
+--------------------
+S B C
+b c ε
+S
+S>B C
+B>b
+B>ε
+C>c
+C>ε
+--------------------
+A B D
+a b c
+A
+A>B D
+A>a
+B>b B
+B>c
+D>c
+--------------------
+List A
+id ε sep
+List
+List>id A
+A>ε
+A>sep List
+--------------------
+S A
+a b c
+S
+S>a A
+S>b S
+A>c
+
+Input: bac (acc)
+--------------------
+S
+( ) ε
+S
+S>S ( S ) S
+S>ε
+--------------------
+S A
+a b ε
+S
+S>a b A
+S>ε
+S>S a a
+A>b
+--------------------
+program antet declarationstmt assignstmt stmtlist iostmt forstmt compstmt condstmt expression operator term stmt boolexpr increment_decrement booloperator relation condition 
+{ return const ; } include < > id using namespace int ( ) = + - * / % cin gg cout ll for double , <= >= == != && || ++ -- if
+program
+program?antet { stmtlist return const }
+antet?include < id > using namespace id ; int id ( )
+stmtlist?stmt
+stmt?declarationstmt
+stmt?assignstmt
+stmt?iostmt
+stmt?forstmt
+stmt?compstmt
+stmt?condstmt
+compstmt?{ stmtlist }
+declarationstmt?int id ;
+declarationstmt?double id ;
+assignstmt?id = expression ;
+expression?term
+expression?( term operator expression )
+term?id
+term?const
+operator?+
+operator?-
+operator?*
+operator?/
+operator?%
+iostmt?cin gg id ;
+iostmt?cout ll id ;
+condition?expression relation expression
+relation?<
+relation?<=
+relation?>
+relation?>=
+relation?==
+relation?!=
+booloperator?&&
+booloperator?||
+condstmt?if ( condition ) { stmtlist }

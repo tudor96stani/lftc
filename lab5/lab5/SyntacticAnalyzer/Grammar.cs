@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace lab5
+namespace lab5.SyntacticAnalyzer
 {
     public class Grammar
     {
@@ -21,13 +21,13 @@ namespace lab5
 
         public void ReadFromFile(string filename)
         {
-            string[] lines = System.IO.File.ReadAllLines("../../"+filename);
+            string[] lines = System.IO.File.ReadAllLines("../../Input/"+filename);
             Nonterminals = new HashSet<string>(lines[0].Split(' '));
             Terminals = new HashSet<string>(lines[1].Split(' '));
             StartSymbol = lines[2];
             foreach(var line in lines.Skip(3))
             {
-                string[] elements = line.Split('>');
+                string[] elements = line.Split('?');
                 string[] right = elements[1].Split(' ');
                 var produRule = new ProductionRule() { Left = elements[0], Right = right.ToList() };
                 ProductionRules.Add(produRule, count++);
@@ -42,7 +42,7 @@ namespace lab5
             Console.WriteLine("\nProduction rules");
             foreach(var rule in ProductionRules)
             {
-                Console.Write(rule.Key.Left+" -> "+String.Join("",rule.Key.Right) +" ("+ rule.Value+")");
+                Console.Write(rule.Key.Left+" -> "+String.Join(" ",rule.Key.Right) +" ("+ rule.Value+")");
                 Console.WriteLine();
             }
         }

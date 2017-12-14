@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace lab5
+namespace lab5.SyntacticAnalyzer
 {
     public static class Utils
     {
@@ -314,10 +314,13 @@ namespace lab5
                 foreach (var rightElem in rule.Right.Where(x => x != sym))
                 {
                     first=new HashSet<string>(first.Union(firsts[rightElem]));
-                    if (first.Count() == 0 || first.Any(x => x == EPSILON))
+                    if (first.Count() == 0 || firsts[rightElem].Any(x => x == EPSILON))
                         continue;
                     else
+                    {
+                        first.Remove(EPSILON);
                         break;
+                    }
                 }
             }
             return first;
@@ -327,12 +330,19 @@ namespace lab5
         public static HashSet<string> FirstOfWithoutRule(string sym, Dictionary<string, HashSet<string>> firsts, List<string> tail)
         {
             var first = firsts[sym];
+            int i = 0;
+            while(first.Contains(EPSILON))
+            {
+                var nextFirst = firsts[tail[i]];
+                first = PlusCircle(first.ToList(), nextFirst.ToList());
+            }
 
             //if there is an epsilon in the First set for the sym,
             //take the elements in the tail one by one, until one that doesn't contain epsilon is found.
             //when one that does not contain epsilon is found 
             //remove epsilon from the set that is going to be returned and stop processing the tail
             //if no such symbol is found, epsilon will remain in the tail
+            /*
             if (first.Count() == 0 || first.Any(x => x == EPSILON))
             {
                 for (int i = 0; i < tail.Count();i++)
@@ -357,6 +367,7 @@ namespace lab5
 
                 }
             }
+            */
             return first;
         }
 
@@ -395,7 +406,7 @@ namespace lab5
                                     }
                                 }*/
                                 var beta = rule.Key.Right.Skip(i + 1).ToList();
-                                firstOfBeta = FirstOfWithoutRule(beta[0], Firsts, beta);
+                                firstOfBeta = FirstOfWithoutRule(beta[0], Firsts, beta.Skip(1).ToList());
 
                                 //Follow(A) = Follow(A) U First(beta)
                                 var reunion = new HashSet<string>(res[rule.Key.Right[i]].Union(firstOfBeta.Where(x => x != EPSILON)));
@@ -643,6 +654,15 @@ namespace lab5
 
             }
             return builder.ToString();
+        }
+
+        public static void ForEach<T>(this IEnumerable<T> source, Action<T> action)
+        {
+
+            foreach (T element in source)
+            {
+                action(element);
+            }
         }
 
     }

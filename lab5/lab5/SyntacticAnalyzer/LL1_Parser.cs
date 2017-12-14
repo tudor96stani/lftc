@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace lab5
+namespace lab5.SyntacticAnalyzer
 {
     public class LL1_Parser
     {
@@ -11,7 +11,7 @@ namespace lab5
         public ParseTable Table { get; set; } 
         public Stack<string> Stack { get; set; }
         public List<string> Output { get; set; }
-        public string Input { get; set; }
+        public string InputSequence { get; set; }
         public LL1_Parser()
         {
             try
@@ -61,10 +61,10 @@ namespace lab5
 
         public void PrintCurrentConfiguration()
         {
-            Console.Write("("+Input+",");
+            Console.Write("("+InputSequence+",");
             foreach(var stackElem in Stack)
             {
-                Console.Write(stackElem);
+                Console.Write(stackElem+" ");
             }
             Console.Write(",");
             if (Output.Count == 0)
@@ -79,17 +79,17 @@ namespace lab5
             Console.Write(")|-");
         }
 
-        public void Parse(string sequence)
+        public void ParseSequence(string sequence)
         {
            
-            Input = sequence + "$";
+            InputSequence = sequence + "$";
             PrintCurrentConfiguration();
             bool working = true;
             while(working)
             {
                 string tableEntry;
                 var A = Stack.Peek();
-                var a = Input[0];
+                var a = InputSequence[0];
                 if(Table.Table.TryGetValue(A[0]+","+a,out tableEntry))
                 {
                     //we have a value that is either a (Rule,number) pair, pop or acc
@@ -101,8 +101,8 @@ namespace lab5
                     }
                     else if(tableEntry=="pop")
                     {
-                        Console.Write($"(pop {Input[0]})");
-                        Input = Input.Substring(1);
+                        Console.Write($"(pop {InputSequence[0]})");
+                        InputSequence = InputSequence.Substring(1);
                         Stack.Pop();
                         working = true;
 
@@ -118,8 +118,61 @@ namespace lab5
                         var charArrayOfAlpha = alpha.ToCharArray();
                         Array.Reverse(charArrayOfAlpha);
                         foreach(var ch in new string(charArrayOfAlpha))
-                            Stack.Push(ch.ToString());
-                        Output.Add(i);
+                            if(ch.ToString()!=Utils.EPSILON)
+                                Stack.Push(ch.ToString());
+                        PrintCurrentConfiguration();
+                    }
+                }
+                else
+                {
+                    //error
+                    working = false;
+                    Console.WriteLine($"\nERROR\nUnexpected token {a}.");
+                    break;
+                }
+            }
+        }
+
+        public void Parse(List<string> PIF)
+        {
+            PIF.Add("$");
+            PrintCurrentConfiguration();
+            bool working = true;
+            while (working)
+            {
+                string tableEntry;
+                var A = Stack.Peek();
+                var a = PIF[0];
+                if (Table.Table.TryGetValue(A + "," + a, out tableEntry))
+                {
+                    //we have a value that is either a (Rule,number) pair, pop or acc
+                    if (tableEntry == "acc")
+                    {
+                        working = false;
+                        Console.Write("acc");
+                        break;
+                    }
+                    else if (tableEntry == "pop")
+                    {
+                        Console.Write($"(pop {PIF[0]})");
+                        PIF = PIF.Skip(1).ToList();
+                        Stack.Pop();
+                        working = true;
+
+                        PrintCurrentConfiguration();
+                    }
+                    else
+                    {
+                        Console.Write("(push)");
+                        var elements = tableEntry.Split(' ');
+                        var alpha = elements.Take(elements.Length - 1).ToList();
+                        var i = elements[elements.Length - 1 ];
+                        Stack.Pop();
+                        alpha.Reverse();
+                        //Array.Reverse(charArrayOfAlpha);
+                        foreach (var ch in alpha)
+                            if (ch != Utils.EPSILON)
+                                Stack.Push(ch);
                         PrintCurrentConfiguration();
                     }
                 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace lab5
+namespace lab5.SyntacticAnalyzer
 {
     public class ParseTable
     {
@@ -125,7 +125,7 @@ namespace lab5
                 var firstOfAlpha = Utils.FirstOf(rule.Key.Right[0], Firsts, rule.Key);
                 foreach (var f in firstOfAlpha.Where(x => !x.Contains(Utils.EPSILON)))
                 {
-                    Table.Add(rule.Key.Left + "," + f, String.Join("", rule.Key.Right) + "," + rule.Value);
+                    Table.Add(rule.Key.Left + "," + f, String.Join(" ", rule.Key.Right) + " " + rule.Value);
                 }
 
                 if (firstOfAlpha.Contains(Utils.EPSILON))
@@ -133,7 +133,7 @@ namespace lab5
                     var followOfLHS = Follows[rule.Key.Left];
                     foreach (var fo in followOfLHS)
                     {
-                        Table.Add(rule.Key.Left + "," + fo, String.Join("", rule.Key.Right) + "," + rule.Value);
+                        Table.Add(rule.Key.Left + "," + fo, String.Join(" ", rule.Key.Right) + " " + rule.Value);
                     }
                 }
             }
@@ -152,7 +152,7 @@ namespace lab5
             Console.WriteLine("\nPARSING TABLE:");
             foreach (var kvp in Table)
             {
-                Console.WriteLine(kvp.Key + " " + kvp.Value);
+                Console.WriteLine("("+kvp.Key + ")=" + kvp.Value);
             }
         }
     }

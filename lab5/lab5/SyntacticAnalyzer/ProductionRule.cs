@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace lab5
+namespace lab5.SyntacticAnalyzer
 {
     public class ProductionRule
     {

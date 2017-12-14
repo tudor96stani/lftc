@@ -1,7 +1,0 @@
-﻿S A
-a b c ε
-S
-S>A A c
-A>a A
-A>b
-A>ε
