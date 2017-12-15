@@ -1,11 +1,18 @@
 #include <iostream>
 using namespace std;
 int main(){
-    int a;
-    a=10;
-    if(a+0>10)
-    {
-        cout<<a;
-    }
+    int r;
+    double MPI;
+    MPI=3.1415;
+    cin>>r;
+    double a;
+    double c;
+    int doi;
+    c=MPI*2;
+    c=c*5;
+    a=MPI*2;
+    a=a*5;
+    cout<<c;
+    cout<<a;
     return 0;
 }
