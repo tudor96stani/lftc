@@ -38,7 +38,7 @@ operator?%
 iostmt?cin gg id ;
 iostmt?cout ll id ;
 
-forstmt?for ( assignstmt boolexpr ; increment_decrement ) { stmtlist }
+forstmt?for ( assignstmt ; boolexpr ; increment_decrement ) { stmtlist }
 boolexpr?boolexpr booloperator boolexpr
 boolexpr?condition
 condition?expression relation expression

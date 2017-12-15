@@ -72,7 +72,7 @@ namespace lab5.SyntacticAnalyzer
             {
                 foreach (var outputElem in Output)
                 {
-                    Console.Write(outputElem);
+                    Console.Write(outputElem + " ");
                 }
             }
             Console.Write(")|-");
@@ -95,7 +95,7 @@ namespace lab5.SyntacticAnalyzer
                     if(tableEntry=="acc")
                     {
                         working = false;
-                        Console.Write("acc");
+                        Console.Write("ACC");
                         break;
                     }
                     else if(tableEntry=="pop")
@@ -148,7 +148,7 @@ namespace lab5.SyntacticAnalyzer
                     if (tableEntry == "acc")
                     {
                         working = false;
-                        Console.Write("acc");
+                        Console.Write("ACC");
                         break;
                     }
                     else if (tableEntry == "pop")
@@ -172,6 +172,7 @@ namespace lab5.SyntacticAnalyzer
                         foreach (var ch in alpha)
                             if (ch != Utils.EPSILON)
                                 Stack.Push(ch);
+                        Output.Add(i);
                         PrintCurrentConfiguration();
                     }
                 }
@@ -182,6 +183,21 @@ namespace lab5.SyntacticAnalyzer
                     Console.WriteLine($"\nERROR\nUnexpected token {a}.");
                     break;
                 }
+            }
+            //PrintDerivationString();
+        }
+
+        public void PrintDerivationString()
+        {
+            Console.WriteLine("\n"+G.StartSymbol+"(0)=>");
+            var tail = new List<string>();
+            foreach(var ruleNumber in Output)
+            {
+                var rule = G.ProductionRules.FirstOrDefault(x => x.Value == int.Parse(ruleNumber));
+                //tail = rule.Key.Right;
+                Console.Write(String.Join(" ",rule.Key.Right)+" "+String.Join(" ",tail)+$" ({rule.Value})=>");
+                Console.WriteLine();
+                tail = rule.Key.Right.Skip(1).ToList();
             }
         }
     }

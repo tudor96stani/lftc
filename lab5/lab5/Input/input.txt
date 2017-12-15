@@ -8,10 +8,8 @@ int main(){
     double a;
     double c;
     int doi;
-    c=MPI*2;
-    c=c*5;
-    a=MPI*2;
-    a=a*5;
+    c=PI*2*r;
+    a=MPI*2*r;
     cout<<c;
     cout<<a;
     return 0;

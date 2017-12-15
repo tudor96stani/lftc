@@ -1,4 +1,4 @@
-﻿program antet factor stmtlist1 returnstmt declarationstmt assignstmt stmtlist iostmt forstmt compstmt condstmt expression operator term stmt boolexpr increment_decrement booloperator relation condition addsub term prodterm value sum unit produnit
+﻿program antet factor expression1 term1 stmtlist1 returnstmt declarationstmt assignstmt stmtlist iostmt forstmt compstmt condstmt expression operator term stmt boolexpr increment_decrement booloperator relation condition addsub term prodterm value sum unit produnit
 { return const ; } ε include < > id using namespace int ( ) = + - * / % cin >> cout << for double , <= >= == != && || ++ -- if
 program
 program?antet { stmtlist }
@@ -17,9 +17,18 @@ compstmt?{ stmtlist }
 declarationstmt?int id ;
 declarationstmt?double id ;
 assignstmt?id = expression ;
-expression?term
-expression?id operator expression
-term?const
+expression?term expression1
+expression1?+ expression
+expression1?- expression
+expression1?ε
+term?factor term1
+term1?* term
+term1?/ term
+term1?ε
+factor?id
+factor?const
+factor?( expression )
+factor?- factor
 operator?+
 operator?-
 operator?*
