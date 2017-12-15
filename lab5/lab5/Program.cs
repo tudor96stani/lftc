@@ -19,7 +19,8 @@ namespace lab5
                 /*
                 Console.WriteLine("Please enter a sequence:");
                 var sequence = Console.ReadLine();
-                parser.ParseSequence(sequence);*/
+                parser.ParseSequence(sequence);
+                */
                 parser.Parse(pif);
             }catch(ArgumentException)
             {

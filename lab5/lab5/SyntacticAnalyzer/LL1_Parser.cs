@@ -28,9 +28,8 @@ namespace lab5.SyntacticAnalyzer
             {
                 var fi = Utils.First(G);
                 var fol = Utils.Follow(G, fi);
-                PrintFirstAndFollow(fi,Utils.Follow(G,fi));
+                PrintFirstAndFollow(fi,fol);
                 throw ex;
-
             }
 
         }

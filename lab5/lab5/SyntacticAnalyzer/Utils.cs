@@ -330,19 +330,23 @@ namespace lab5.SyntacticAnalyzer
         public static HashSet<string> FirstOfWithoutRule(string sym, Dictionary<string, HashSet<string>> firsts, List<string> tail)
         {
             var first = firsts[sym];
-            int i = 0;
+            //int i = 0;
+            /*
             while(first.Contains(EPSILON))
             {
-                var nextFirst = firsts[tail[i]];
-                first = PlusCircle(first.ToList(), nextFirst.ToList());
-            }
+                if (tail.Count() > 0)
+                {
+                    var nextFirst = firsts[tail[i]];
+                    first = PlusCircle(first.ToList(), nextFirst.ToList());
+                }
+            }*/
 
             //if there is an epsilon in the First set for the sym,
             //take the elements in the tail one by one, until one that doesn't contain epsilon is found.
             //when one that does not contain epsilon is found 
             //remove epsilon from the set that is going to be returned and stop processing the tail
             //if no such symbol is found, epsilon will remain in the tail
-            /*
+
             if (first.Count() == 0 || first.Any(x => x == EPSILON))
             {
                 for (int i = 0; i < tail.Count();i++)
@@ -367,7 +371,7 @@ namespace lab5.SyntacticAnalyzer
 
                 }
             }
-            */
+
             return first;
         }
 
