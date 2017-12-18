@@ -21,15 +21,23 @@ namespace lab5
                 var sequence = Console.ReadLine();
                 parser.ParseSequence(sequence);
                 */
-                parser.Parse(pif);
-                Console.WriteLine("\n\nDo you want to see the derivations string?y/n");
-                if (Console.ReadLine().ToLower() == "y")
-                    parser.PrintDerivationString();
+                if (parser.Parse(pif))
+                {
+                    Console.WriteLine("\n\nProgram is syntactically and lexically correct.");
+                    Console.WriteLine("\nDo you want to see the derivations string?y/n");
+                    if (Console.ReadLine().ToLower() == "y")
+                        parser.PrintDerivationString();
+                }
+                else
+                {
+                    Console.WriteLine("The program is not correct.");
+                }
                 
             }catch(ArgumentException)
             {
                 Console.WriteLine("\n********************************\nCONFLICT! GRAMMAR IS NOT LL(1)!\n********************************\n");
             }
+
         }
     }
 }

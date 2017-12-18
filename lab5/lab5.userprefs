@@ -1,11 +1,6 @@
 ﻿<Properties StartupConfiguration="{2E749FB4-6F41-4359-A008-ABFA08C9E990}|Default">
   <MonoDevelop.Ide.ItemProperties.lab5 PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="lab5/Input/Grammar.txt">
-    <Files>
-      <File FileName="lab5/Input/input.txt" Line="12" Column="14" />
-      <File FileName="lab5/Input/Grammar.txt" Line="48" Column="39" />
-    </Files>
-  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />

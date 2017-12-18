@@ -78,7 +78,7 @@ namespace lab5.SyntacticAnalyzer
             Console.Write(")|-");
         }
 
-        public void ParseSequence(string sequence)
+        public bool ParseSequence(string sequence)
         {
            
             InputSequence = sequence + "$";
@@ -127,12 +127,13 @@ namespace lab5.SyntacticAnalyzer
                     //error
                     working = false;
                     Console.WriteLine($"\nERROR\nUnexpected token {a}.");
-                    break;
+                    return false;
                 }
             }
+            return true;
         }
 
-        public void Parse(List<string> PIF)
+        public bool Parse(List<string> PIF)
         {
             PIF.Add("$");
             PrintCurrentConfiguration();
@@ -181,10 +182,10 @@ namespace lab5.SyntacticAnalyzer
                     //error
                     working = false;
                     Console.WriteLine($"\nERROR\nUnexpected token {a}.");
-                    break;
+                    return false;
                 }
             }
-            //PrintDerivationString();
+            return true;
         }
 
         public void PrintDerivationString()
