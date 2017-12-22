@@ -32,8 +32,10 @@ namespace lab5
                 {
                     Console.WriteLine("The program is not correct.");
                 }
-                
-            }catch(ArgumentException)
+
+            }
+
+            catch(ArgumentException)
             {
                 Console.WriteLine("\n********************************\nCONFLICT! GRAMMAR IS NOT LL(1)!\n********************************\n");
             }

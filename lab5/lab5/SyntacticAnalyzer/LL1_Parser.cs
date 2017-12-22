@@ -11,7 +11,7 @@ namespace lab5.SyntacticAnalyzer
         public ParseTable Table { get; set; } 
         public Stack<string> Stack { get; set; }
         public List<string> Output { get; set; }
-        public string InputSequence { get; set; }
+        public List<string> InputSequence { get; set; }
         public LL1_Parser()
         {
             try
@@ -60,7 +60,7 @@ namespace lab5.SyntacticAnalyzer
 
         public void PrintCurrentConfiguration()
         {
-            Console.Write("("+InputSequence+",");
+            //Console.Write("("+String.Join("",InputSequence)+",");
             foreach(var stackElem in Stack)
             {
                 Console.Write(stackElem+" ");
@@ -80,8 +80,8 @@ namespace lab5.SyntacticAnalyzer
 
         public bool ParseSequence(string sequence)
         {
-           
-            InputSequence = sequence + "$";
+            InputSequence = sequence.Select(x => x.ToString()).ToList();
+            InputSequence.Add("$");
             PrintCurrentConfiguration();
             bool working = true;
             while(working)
@@ -101,7 +101,7 @@ namespace lab5.SyntacticAnalyzer
                     else if(tableEntry=="pop")
                     {
                         Console.Write($"(pop {InputSequence[0]})");
-                        InputSequence = InputSequence.Substring(1);
+                        InputSequence = InputSequence.Skip(1).ToList();
                         Stack.Pop();
                         working = true;
 
@@ -110,15 +110,14 @@ namespace lab5.SyntacticAnalyzer
                     else
                     {
                         Console.Write("(push)");
-                        var elements = tableEntry.Split(',');
-                        var alpha = elements[0];
-                        var i = elements[1];
+                        var elements = tableEntry.Split(' ');
+                        var alpha = elements.Take(elements.Length - 1).ToList();
+                        var i = elements[elements.Length-1];
                         Stack.Pop();
-                        var charArrayOfAlpha = alpha.ToCharArray();
-                        Array.Reverse(charArrayOfAlpha);
-                        foreach(var ch in new string(charArrayOfAlpha))
+                        alpha.Reverse();
+                        foreach(var ch in alpha)
                             if(ch.ToString()!=Utils.EPSILON)
-                                Stack.Push(ch.ToString());
+                                Stack.Push(ch);
                         PrintCurrentConfiguration();
                     }
                 }

@@ -1,6 +1,11 @@
 ﻿<Properties StartupConfiguration="{2E749FB4-6F41-4359-A008-ABFA08C9E990}|Default">
   <MonoDevelop.Ide.ItemProperties.lab5 PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench />
+  <MonoDevelop.Ide.Workbench ActiveDocument="lab5/Program.cs">
+    <Files>
+      <File FileName="lab5/Program.cs" Line="41" Column="14" />
+      <File FileName="lab5/SyntacticAnalyzer/LL1_Parser.cs" Line="63" Column="15" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
