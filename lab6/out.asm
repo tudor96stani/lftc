@@ -8,6 +8,8 @@ data segment
 	t6 dw ?
 	t7 dw ?
 	t8 dw ?
+	t9 dw ?
+	t10 dw ?
 	c dw ?
 	b dw ?
 	a dw ?
@@ -35,44 +37,71 @@ mov b,bx
 
 
 
+mov ax,1
+mov t1,ax
+
+mov ax,a
+mov bx,t1
+add ax,bx
+mov t2,ax
+
+mov ax,t2
+mov bx,5
+cmp ax,bx
+jle label1
+mov ax,a
+call disp
+mov ax,b
+call disp
+
+
+
+label1:
+
+
+
+
+
+
 
 
 
 mov ax,1
-mov t1,ax
-
-mov ax,b
-mov bx,t1
-sub ax,bx
-mov t2,ax
-mov ax,t2
 mov t3,ax
 
-mov ax,t3
+mov ax,b
+mov bx,t3
+sub ax,bx
 mov t4,ax
-
-mov ax,a
-mov bx,t4
-mul bx
+mov ax,t4
 mov t5,ax
-
 
 mov ax,t5
 mov t6,ax
 
-
-mov ax,t6
+mov ax,a
+mov bx,t6
+mul bx
 mov t7,ax
 
-mov ax,1
-mov bx,t7
-add ax,bx
+
+mov ax,t7
 mov t8,ax
+
+
 mov ax,t8
+mov t9,ax
+
+mov ax,1
+mov bx,t9
+add ax,bx
+mov t10,ax
+mov ax,t10
 mov c,ax
 
 mov ax,c
 call disp
+
 
 
 

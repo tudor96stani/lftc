@@ -10,7 +10,7 @@
     extern void printAll();
     void yyerror(const char *s);
     int t = 1;
-    int lbl = 0;
+    int lbl = 1;
     char * NewTempName()
     {
         char temp[10];
@@ -23,7 +23,8 @@
     {
         char temp[10];
         char l[10];
-        l[0] = 'l';
+        sprintf(l,"label");
+        
         sprintf(temp,"%d",lbl++);
         return strdup(strcat(l,temp));
     }
@@ -102,6 +103,8 @@
 %token NAMESPACE
 %token GT
 %token INT
+%token EE
+%token NE
 %type <attributes> stmt
 %type <attributes> assign_stmt
 %type <attributes> iostmt
@@ -115,6 +118,9 @@
 %type <attributes> stmt_list
 %type <attributes> stmt_list1
 %type <attributes> declstmt
+%type <attributes> ifstmt
+%type <attributes> boolOp
+%type <attributes> cond
 %%
 program: antet '{' stmt_list RETURN CONST ';' '}'
             {
@@ -159,9 +165,16 @@ stmt_list1:
                 $$.code="";
                 $$.varn="";
             }
-stmt:
+stmt:ifstmt 
+            {
+                
+                $$.code=strdup($1.code);
+                $$.varn="";
+            }
+    |
     assign_stmt
             {
+             
                 $$.code=strdup($1.code);
             }
     |
@@ -172,6 +185,7 @@ stmt:
     |
     declstmt
             {
+                
                 $$.code ="";
                 $$.varn="";
             }
@@ -271,6 +285,26 @@ factor:'(' expression ')'
 
             }
 
+ifstmt:IF '(' cond  ')' '{' stmt_list '}'
+        {
+            /*  
+                mov ax,expression1.varn
+                mov bx,expression2.varn
+                cmp ax,bx
+                j.. labeli
+                stmt_list.code
+                labeli:
+            */
+                
+                char* temp = malloc(1000*sizeof(char));
+                char* lbl = NewLabelName();
+                sprintf(temp,"%s%s\n%s\n%s:\n",$3.code,lbl,$6.code,lbl);
+                $$.code=strdup(temp);
+                //free(temp);
+                //$$.varn="";
+        };
+
+
 assign_stmt:ID '=' expression ';'
         {
             
@@ -310,9 +344,49 @@ declstmt: INT ID ';'
             $$.varn="";
             free(temp);
         }
+
+cond:expression boolOp expression 
+        {
+            /*
+                mov ax,expression1.varn
+                mov bx,expression2.varn
+                cmp ax,bx
+                boolOp.code 
+            */
+            
+            char* temp =malloc(1000*sizeof(char));
+            sprintf(temp,"%s\n%s\nmov ax,%s\nmov bx,%s\ncmp ax,bx\n%s ",$1.code,$3.code,$1.varn,$3.varn,$2.code);
+            $$.code=strdup(temp);
+            free(temp);
+            $$.varn="";
+        }
+
+boolOp: GT
+         {
+            $$.code = "jle";
+            $$.varn="";
+         } 
+        | LT 
+        {
+            $$.code = "jge";
+            $$.varn="";
+        } 
+        | 
+        EE 
+        {
+            $$.code = "jne";
+            $$.varn="";
+        } 
+        | 
+        NE
+        {
+            $$.code = "je";
+            $$.varn="";
+        } 
 %%
 int main(int argc, char *argv[]) {
     ++argv, --argc; 
+
     if (argc > 0){
         yyin = fopen(argv[0], "r"); 
         int c;

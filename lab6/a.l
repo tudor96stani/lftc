@@ -107,7 +107,7 @@ errC [0]*[1-9]*
 {digit}							{int i;sscanf(yytext,"%d",&i);yylval.intval = i; return CONST; }
 {no}                                {int i;sscanf(yytext,"%d",&i);yylval.intval = i;return CONST; }
 {digit}+"."{digit}{no}         {int i;sscanf(yytext,"%d",&i);yylval.intval = i;	return CONST; }
-if 							{return IF;}
+\if 							{return IF;}
 then 						{return THEN;}
 else						{return ELSE;}
 cin 						{return CIN;}
@@ -118,10 +118,12 @@ using           {return USING;}
 namespace       {return NAMESPACE;}
 return 			{return RETURN;}
 \>>							{return GG;}
+\!=							{return NE;}
 \<<							{return LL;}
 \<							{return LT;}
 \>							{return GT;}
 \=							{return '=';}
+\==							{return EE;}
 \id 						{addId(yytext);yylval.attributes.varn=strdup(yytext);return ID;}
 \const 			{int i;sscanf(yytext,"%d",&i);yylval.intval = i;printf("i=%d",i);return CONST;}
 \+ {return '+';}

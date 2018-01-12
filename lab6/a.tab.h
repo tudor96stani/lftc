@@ -54,7 +54,9 @@
      RETURN = 270,
      NAMESPACE = 271,
      GT = 272,
-     INT = 273
+     INT = 273,
+     EE = 274,
+     NE = 275
    };
 #endif
 /* Tokens.  */
@@ -74,13 +76,15 @@
 #define NAMESPACE 271
 #define GT 272
 #define INT 273
+#define EE 274
+#define NE 275
 
 
 
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
-#line 71 "a.y"
+#line 72 "a.y"
 {
     struct{
         char* code;
@@ -100,7 +104,7 @@ typedef union YYSTYPE
     int intval;
 }
 /* Line 1529 of yacc.c.  */
-#line 104 "a.tab.h"
+#line 108 "a.tab.h"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
